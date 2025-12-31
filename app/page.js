@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, ArrowRight, ExternalLink, Briefcase } from "lucide-react";
-// IMPORT THE NEW 3D CARD COMPONENTS
-import { CardContainer, CardBody, CardItem } from "../components/ui/3d-card";
+import { CardStack } from "../components/ui/card-stack";
 
 // --- VISHNU'S DATA ---
 const personalInfo = {
@@ -13,34 +12,34 @@ const personalInfo = {
   email: "vishnuvrkarnati@gmail.com",
 };
 
-// SKILL CARDS DATA (Updated for 3D View)
+// SKILL CARDS DATA
 const skillCards = [
   {
     id: 1,
     name: "Java 17 & Core",
     designation: "Expert",
-    icon: <Code2 size={80} className="text-cyan-400" />, // Icon made larger for 3D effect
+    icon: <Code2 className="text-cyan-400" size={24} />,
     content: "Deep understanding of JVM internals, Garbage Collection (G1GC), and Multithreading. Proficient in Java 8+ features like Streams and Lambdas.",
   },
   {
     id: 2,
     name: "Spring Boot Ecosystem",
     designation: "Expert",
-    icon: <Server size={80} className="text-green-400" />,
+    icon: <Server className="text-green-400" size={24} />,
     content: "Building production-ready Microservices. Experience with Spring Cloud, Spring Security, Actuator, and custom starters.",
   },
   {
     id: 3,
     name: "System Design",
     designation: "Advanced",
-    icon: <Cloud size={80} className="text-yellow-400" />,
+    icon: <Cloud className="text-yellow-400" size={24} />,
     content: "Expertise in Distributed Transactions (SAGA Pattern), Event-Driven Architecture, and resilience patterns (Circuit Breaker).",
   },
   {
     id: 4,
     name: "Kafka & Messaging",
     designation: "Advanced",
-    icon: <Terminal size={80} className="text-purple-400" />,
+    icon: <Terminal className="text-purple-400" size={24} />,
     content: "Handling high-throughput event streaming. Implemented async workflows using AWS SQS and Kafka with zero data loss.",
   },
 ];
@@ -86,6 +85,7 @@ const stagger = {
 
 export default function Portfolio() {
   return (
+    // FORCE DARK BACKGROUND HERE
     <main className="min-h-screen relative bg-slate-950 selection:bg-cyan-500 selection:text-white overflow-hidden text-slate-200">
       
       {/* BACKGROUND GLOW BLOBS */}
@@ -95,7 +95,7 @@ export default function Portfolio() {
         <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-blue-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-20">
+      <div className="max-w-5xl mx-auto px-6 py-20">
         
         {/* HERO SECTION */}
         <motion.section 
@@ -137,43 +137,27 @@ export default function Portfolio() {
           </motion.div>
         </motion.section>
 
-        {/* --- 3D SKILLS SECTION --- */}
+        {/* SKILLS SECTION (DRAGGABLE CARDS) */}
         <SectionHeader title="Technical Arsenal" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
-          {skillCards.map((card) => (
-            <CardContainer key={card.id} className="inter-var w-full">
-              <CardBody className="bg-slate-900/50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-cyan-500/[0.1] dark:bg-black dark:border-white/[0.2] border-white/[0.1] w-full h-auto rounded-xl p-6 border transition-all duration-300">
-                
-                {/* 1. Header with Name & Level */}
-                <div className="flex justify-between items-center mb-6">
-                  <CardItem translateZ="50" className="text-xl font-bold text-white">
-                    {card.name}
-                  </CardItem>
-                  <CardItem translateZ="50" className="px-3 py-1 rounded-full text-xs font-bold bg-white text-black">
-                    {card.designation}
-                  </CardItem>
-                </div>
-
-                {/* 2. The Pop-out Icon */}
-                <CardItem translateZ="100" className="w-full mt-4 flex justify-center py-6">
-                   {/* We wrap the icon in a div to allow the 3D effect to lift it */}
-                   <div className="drop-shadow-2xl">
-                     {card.icon}
-                   </div>
-                </CardItem>
-
-                {/* 3. Description Text */}
-                <CardItem
-                  as="p"
-                  translateZ="60"
-                  className="text-slate-300 text-sm max-w-sm mt-6 leading-relaxed"
-                >
-                  {card.content}
-                </CardItem>
-                
-              </CardBody>
-            </CardContainer>
-          ))}
+        <div className="h-[25rem] flex items-center justify-center w-full mb-24">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-24 w-full">
+            <div className="max-w-md text-center md:text-left flex-1">
+               <h3 className="text-2xl font-bold text-white mb-4">
+                 My Core <span className="text-cyan-400">Competencies</span>
+               </h3>
+               <p className="text-slate-400 leading-relaxed mb-6">
+                 I don't just use frameworks; I understand their internals. 
+                 Swipe through the cards to see my expertise in Java, Cloud, and System Design.
+               </p>
+               <div className="flex items-center gap-2 text-sm text-slate-500 justify-center md:justify-start">
+                  <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></div>
+                  Cards auto-rotate or drag to swipe
+               </div>
+            </div>
+            <div className="flex-1 flex justify-center md:justify-start">
+                <CardStack items={skillCards} />
+            </div>
+          </div>
         </div>
 
         {/* EXPERIENCE SECTION */}
