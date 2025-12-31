@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, ArrowRight, ExternalLink, Briefcase } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, ArrowRight, ExternalLink, Briefcase, Database } from "lucide-react";
 
 // --- VISHNU'S DATA ---
 const personalInfo = {
@@ -11,7 +11,7 @@ const personalInfo = {
   email: "vishnuvrkarnati@gmail.com",
 };
 
-// SKILL CARDS DATA
+// SKILL CARDS DATA (Added AWS Card)
 const skillCards = [
   {
     id: 1,
@@ -29,13 +29,20 @@ const skillCards = [
   },
   {
     id: 3,
-    name: "System Design",
+    name: "AWS & Cloud Native",
     designation: "Advanced",
-    icon: <Cloud className="text-yellow-400" size={24} />,
-    content: "Expertise in Distributed Transactions (SAGA Pattern), Event-Driven Architecture, and resilience patterns (Circuit Breaker).",
+    icon: <Cloud className="text-orange-400" size={24} />,
+    content: "Designing Serverless architectures with Lambda & API Gateway. Infrastructure as Code (IaC) using CloudFormation and deploying to ECS/Fargate.",
   },
   {
     id: 4,
+    name: "System Design",
+    designation: "Advanced",
+    icon: <Database className="text-yellow-400" size={24} />,
+    content: "Expertise in Distributed Transactions (SAGA Pattern), Event-Driven Architecture, and resilience patterns (Circuit Breaker).",
+  },
+  {
+    id: 5,
     name: "Kafka & Messaging",
     designation: "Advanced",
     icon: <Terminal className="text-purple-400" size={24} />,
@@ -84,7 +91,6 @@ const stagger = {
 
 export default function Portfolio() {
   return (
-    // Added overflow-x-hidden to prevent horizontal scrolling on mobile
     <main className="min-h-screen relative bg-slate-950 selection:bg-cyan-500 selection:text-white overflow-x-hidden text-slate-200 font-sans">
       
       {/* BACKGROUND GLOW BLOBS */}
@@ -173,7 +179,6 @@ export default function Portfolio() {
 
         {/* EXPERIENCE SECTION */}
         <SectionHeader title="Professional Experience" />
-        {/* Adjusted padding left for mobile to fix alignment */}
         <div className="space-y-8 mb-24 md:mb-32 relative pl-6 md:pl-8 border-l border-slate-800 ml-2 md:ml-4">
           {experience.map((job, idx) => (
             <motion.div 
@@ -181,7 +186,6 @@ export default function Portfolio() {
               initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.2 }}
               className="relative"
             >
-              {/* Adjusted dot position for mobile */}
               <span className="absolute -left-[33px] md:-left-[41px] top-1 h-4 w-4 md:h-5 md:w-5 rounded-full border-4 border-slate-900 bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]"></span>
               
               <div className="glass-card p-5 md:p-6 rounded-xl hover:bg-white/5 transition-colors">
