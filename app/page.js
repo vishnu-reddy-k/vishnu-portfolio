@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, ArrowRight, ExternalLink, Briefcase } from "lucide-react";
 import { CardStack } from "../components/ui/card-stack";
 
-// --- VISHNU'S REAL DATA ---
+// --- VISHNU'S DATA ---
 const personalInfo = {
   name: "Vishnu Reddy",
   role: "Backend Engineer (Java & Microservices)",
@@ -12,7 +12,7 @@ const personalInfo = {
   email: "vishnuvrkarnati@gmail.com",
 };
 
-// SKILL CARDS FOR THE DRAGGABLE STACK
+// SKILL CARDS DATA
 const skillCards = [
   {
     id: 1,
@@ -72,7 +72,7 @@ const projects = [
   }
 ];
 
-// --- ANIMATIONS ---
+// --- ANIMATIONS CONFIG ---
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
@@ -85,13 +85,14 @@ const stagger = {
 
 export default function Portfolio() {
   return (
-    <main className="min-h-screen relative selection:bg-cyan-500 selection:text-white overflow-hidden">
+    // FORCE DARK BACKGROUND HERE
+    <main className="min-h-screen relative bg-slate-950 selection:bg-cyan-500 selection:text-white overflow-hidden text-slate-200">
       
       {/* BACKGROUND GLOW BLOBS */}
       <div className="fixed inset-0 w-full h-full -z-10 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"></div>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-blue-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
       </div>
 
       <div className="max-w-5xl mx-auto px-6 py-20">
@@ -116,7 +117,7 @@ export default function Portfolio() {
             </span>
           </motion.h1>
 
-          <motion.h2 variants={fadeInUp} className="text-2xl md:text-3xl text-slate-400 font-light mb-8 max-w-2xl">
+          <motion.h2 variants={fadeInUp} className="text-2xl md:text-3xl text-slate-300 font-light mb-8 max-w-2xl">
             {personalInfo.role}
           </motion.h2>
 
@@ -125,7 +126,7 @@ export default function Portfolio() {
           </motion.p>
 
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-4 items-center justify-center md:justify-start">
-            <a href={`mailto:${personalInfo.email}`} className="group relative px-8 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-cyan-50 transition-all flex items-center gap-2">
+            <a href={`mailto:${personalInfo.email}`} className="group relative px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-cyan-50 transition-all flex items-center gap-2">
               Contact Me <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
             </a>
             <div className="flex gap-4">
@@ -179,7 +180,7 @@ export default function Portfolio() {
                 <p className="text-cyan-400 font-medium text-sm mb-3 flex items-center gap-2">
                   <Briefcase size={14}/> {job.company}
                 </p>
-                <p className="text-slate-400 leading-relaxed">{job.desc}</p>
+                <p className="text-slate-300 leading-relaxed">{job.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -199,7 +200,7 @@ export default function Portfolio() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{project.title}</h3>
               <p className="text-cyan-400 text-sm font-mono mb-4">{project.tech}</p>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-slate-300 leading-relaxed">
                 {project.desc}
               </p>
             </motion.div>
@@ -216,6 +217,7 @@ export default function Portfolio() {
   );
 }
 
+// HELPER COMPONENTS
 function SectionHeader({ title }) {
   return (
     <div className="flex items-center gap-4 mb-16">
