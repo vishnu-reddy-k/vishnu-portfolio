@@ -153,7 +153,7 @@ export default function Portfolio() {
             <div className="relative w-full h-full rounded-full border-4 border-slate-800/50 overflow-hidden shadow-2xl group">
               {/* Replace '/me.jpg' with your filename if different */}
               <img 
-                src="/me.png" 
+                src="/me2.jpeg" 
                 alt="Vishnu Reddy" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
