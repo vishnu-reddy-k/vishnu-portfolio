@@ -335,43 +335,6 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* TESTIMONIALS SECTION */}
-        <SectionHeader title="What People Say" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
-          {/* Testimonial 1 */}
-          <div className="glass-card p-8 rounded-2xl relative">
-            <div className="absolute -top-4 -left-4 bg-cyan-500 text-slate-900 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="transform rotate-180"><path d="M14.017 21L14.017 18C14.017 16.896 14.321 16.067 14.929 15.513C15.537 14.959 16.485 14.682 17.773 14.682V17C16.918 17 16.49 17.375 16.49 18.125V21H14.017ZM8.017 21L8.017 18C8.017 16.896 8.321 16.067 8.929 15.513C9.537 14.959 10.485 14.682 11.773 14.682V17C10.918 17 10.49 17.375 10.49 18.125V21H8.017ZM16.017 13H18.017C18.017 12 18.017 11 18.017 9C18.017 7.5 17.684 6.375 17.017 5.625C16.35 4.875 15.184 4.5 13.517 4.5V7C14.35 7 14.892 7.146 15.142 7.438C15.392 7.729 15.517 8.25 15.517 9V13H12.017V13ZM10.017 13H12.017C12.017 12 12.017 11 12.017 9C12.017 7.5 11.684 6.375 11.017 5.625C10.35 4.875 9.184 4.5 7.517 4.5V7C8.35 7 8.892 7.146 9.142 7.438C9.392 7.729 9.517 8.25 9.517 9V13H6.017V13Z"></path></svg>
-            </div>
-            <p className="text-slate-300 italic mb-6 leading-relaxed">
-              "The OrderReviewV2 refactor was a beast of a project. Vishnu didn't just port the code; he completely redesigned the flow using the SAGA pattern. He turned a fragile legacy workflow into something that just works. The 75% complexity reduction speaks for itself."
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">EM</div>
-              <div>
-                <h4 className="font-bold text-white text-sm">Engineering Manager</h4>
-                <p className="text-cyan-400 text-xs">Comcast (Order Management)</p>
-              </div>
-            </div>
-          </div>
-          {/* Testimonial 2 */}
-          <div className="glass-card p-8 rounded-2xl relative">
-            <div className="absolute -top-4 -left-4 bg-cyan-500 text-slate-900 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="transform rotate-180"><path d="M14.017 21L14.017 18C14.017 16.896 14.321 16.067 14.929 15.513C15.537 14.959 16.485 14.682 17.773 14.682V17C16.918 17 16.49 17.375 16.49 18.125V21H14.017ZM8.017 21L8.017 18C8.017 16.896 8.321 16.067 8.929 15.513C9.537 14.959 10.485 14.682 11.773 14.682V17C10.918 17 10.49 17.375 10.49 18.125V21H8.017ZM16.017 13H18.017C18.017 12 18.017 11 18.017 9C18.017 7.5 17.684 6.375 17.017 5.625C16.35 4.875 15.184 4.5 13.517 4.5V7C14.35 7 14.892 7.146 15.142 7.438C15.392 7.729 15.517 8.25 15.517 9V13H12.017V13ZM10.017 13H12.017C12.017 12 12.017 11 12.017 9C12.017 7.5 11.684 6.375 11.017 5.625C10.35 4.875 9.184 4.5 7.517 4.5V7C8.35 7 8.892 7.146 9.142 7.438C9.392 7.729 9.517 8.25 9.517 9V13H6.017V13Z"></path></svg>
-            </div>
-            <p className="text-slate-300 italic mb-6 leading-relaxed">
-              "We needed the Critical Service Promotions engine to handle a massive spike in traffic without latency. Vishnu's database optimizations were spot on. He is the guy you want on the team when performance matters."
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">TL</div>
-              <div>
-                <h4 className="font-bold text-white text-sm">Tech Lead</h4>
-                <p className="text-cyan-400 text-xs">Comcast (Promotions Team)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* FOOTER */}
         <footer className="border-t border-slate-800 pt-10 pb-10 text-center text-slate-500 text-sm">
           <p>© {new Date().getFullYear()} Vishnu Reddy. Crafted with Next.js & Tailwind.</p>
