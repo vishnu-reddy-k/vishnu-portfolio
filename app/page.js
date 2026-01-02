@@ -1,17 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, ArrowRight, ExternalLink, Briefcase, Database } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, ArrowRight, ExternalLink, Briefcase, Database, X } from "lucide-react";
 
-// --- VISHNU'S DATA ---
+// --- PERSONAL DATA ---
 const personalInfo = {
   name: "Vishnu Reddy",
   role: "Backend Engineer (Java & Microservices)",
-  about: "I architect scalable distributed systems. With 4 years of experience at Comcast, I specialize in transforming legacy monoliths into efficient, event-driven microservices using Java, Spring Boot, and AWS.",
+  about: "For me, engineering is about leaving the codebase better than I found it. Whether it's refactoring a monolith or designing a new microservice, I aim for clarity and resilience. Outside of work, I apply that same mindset to my life—constantly learning, exploring, and looking for new experiences.",
   email: "vishnuvrkarnati@gmail.com",
 };
 
-// SKILL CARDS DATA (Added AWS Card)
+// SKILL CARDS DATA
 const skillCards = [
   {
     id: 1,
@@ -50,18 +51,36 @@ const skillCards = [
   },
 ];
 
+// EXPERIENCE DATA (Updated for Expandable Cards)
 const experience = [
   {
+    id: "exp-1",
     company: "Comcast",
     role: "Development Engineer 2 (Team Lead)",
     date: "Apr 2024 - Present",
-    desc: "Leading the 'OrderReviewV2' initiative. Refactoring a monolithic BPMN workflow into a modular, flow-based microservice architecture. Reduced system complexity by 75% and improved fault tolerance."
+    // NOTE: Ensure you have a 'comcast.png' in your public folder, or this will use the fallback icon
+    logo: "/comcast.png", 
+    shortDesc: "Leading the 'OrderReviewV2' initiative and refactoring monoliths.",
+    desc: [
+      "Leading the 'OrderReviewV2' initiative. Refactoring a monolithic BPMN workflow into a modular, flow-based microservice architecture.",
+      "Reduced system complexity by 75% and improved fault tolerance.",
+      "Mentoring junior developers and defining coding standards for the team.",
+      "Tech Stack: Java 17, Spring Boot, AWS Step Functions, SAGA Pattern."
+    ]
   },
   {
+    id: "exp-2",
     company: "Comcast",
     role: "Development Engineer 1",
     date: "Jun 2022 - Mar 2024",
-    desc: "Key developer for 'Critical Service Promotions' feature, driving 30% customer acquisition. Optimized high-volume database queries and resolved critical production incidents."
+    logo: "/comcast.png",
+    shortDesc: "Key developer for 'Critical Service Promotions' feature.",
+    desc: [
+      "Key developer for 'Critical Service Promotions' feature, driving 30% customer acquisition.",
+      "Optimized high-volume database queries and resolved critical production incidents.",
+      "Collaborated with product owners to define API contracts.",
+      "Tech Stack: Java, Oracle SQL, Splunk, Kibana."
+    ]
   }
 ];
 
@@ -90,6 +109,8 @@ const stagger = {
 };
 
 export default function Portfolio() {
+  const [selectedId, setSelectedId] = useState(null);
+
   return (
     <main className="min-h-screen relative bg-slate-950 selection:bg-cyan-500 selection:text-white overflow-x-hidden text-slate-200 font-sans">
       
@@ -137,8 +158,8 @@ export default function Portfolio() {
                 Contact Me <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
               </a>
               <div className="flex gap-4">
-                <SocialIcon icon={<Github size={20}/>} href="https://github.com" />
-                <SocialIcon icon={<Linkedin size={20}/>} href="https://linkedin.com" />
+                <SocialIcon icon={<Github size={20}/>} href="https://github.com/vishnukarnati" />
+                <SocialIcon icon={<Linkedin size={20}/>} href="https://www.linkedin.com/in/vishnu-reddy/" />
                 <SocialIcon icon={<Mail size={20}/>} href={`mailto:${personalInfo.email}`} />
               </div>
             </motion.div>
@@ -151,14 +172,11 @@ export default function Portfolio() {
             
             {/* The Image Container */}
             <div className="relative w-full h-full rounded-full border-4 border-slate-800/50 overflow-hidden shadow-2xl group">
-              {/* Replace '/me.jpg' with your filename if different */}
               <img 
-                src="/me2.jpeg" 
+                src="/me.png" 
                 alt="Vishnu Reddy" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              
-              {/* Optional: Glass overlay on hover */}
               <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
           </motion.div>
@@ -199,37 +217,100 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* EXPERIENCE SECTION */}
+        {/* EXPERIENCE SECTION - EXPANDABLE CARDS */}
         <SectionHeader title="Professional Experience" />
-        <div className="space-y-8 mb-24 md:mb-32 relative pl-6 md:pl-8 border-l border-slate-800 ml-2 md:ml-4">
-          {experience.map((job, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.2 }}
-              className="relative"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-32">
+          {experience.map((job) => (
+            <motion.div
+              layoutId={`card-${job.id}`}
+              key={job.id}
+              onClick={() => setSelectedId(job.id)}
+              className="cursor-pointer relative p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:bg-slate-800/50 hover:border-cyan-500/30 transition-colors group"
             >
-              <span className="absolute -left-[33px] md:-left-[41px] top-1 h-4 w-4 md:h-5 md:w-5 rounded-full border-4 border-slate-900 bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]"></span>
-              
-              <div className="glass-card p-5 md:p-6 rounded-xl hover:bg-white/5 transition-colors">
-                <div className="flex flex-col md:flex-row justify-between mb-2 gap-1">
-                  <h3 className="text-lg md:text-xl font-bold text-white flex flex-wrap items-center gap-2">
-                    {job.role} 
-                    <span className="text-[10px] md:text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 whitespace-nowrap">
-                      Full Time
-                    </span>
-                  </h3>
-                  <span className="text-slate-400 font-mono text-sm">{job.date}</span>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-full bg-white p-1 overflow-hidden shrink-0">
+                  <img 
+                    src={job.logo} 
+                    onError={(e) => e.target.src = "https://cdn-icons-png.flaticon.com/512/3686/3686926.png"} 
+                    alt={job.company} 
+                    className="w-full h-full object-contain"
+                  />
                 </div>
-                <p className="text-cyan-400 font-medium text-sm mb-3 flex items-center gap-2">
-                  <Briefcase size={14}/> {job.company}
-                </p>
-                <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-                  {job.desc}
-                </p>
+                <div>
+                  <h3 className="text-white font-bold group-hover:text-cyan-400 transition-colors">{job.role}</h3>
+                  <p className="text-slate-400 text-sm">{job.company}</p>
+                </div>
+              </div>
+              
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                {job.shortDesc}
+              </p>
+              
+              <div className="flex justify-between items-center mt-auto">
+                <span className="text-xs font-mono text-slate-500">{job.date}</span>
+                <span className="text-cyan-400 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                  Read more →
+                </span>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* EXPANDED MODAL OVERLAY */}
+        <AnimatePresence>
+          {selectedId && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedId(null)}
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+              />
+              <motion.div
+                layoutId={`card-${selectedId}`}
+                className="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-3xl overflow-hidden relative z-10 shadow-2xl m-4"
+              >
+                <button
+                  onClick={() => setSelectedId(null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors z-20"
+                >
+                  <X size={20} />
+                </button>
+                <div className="p-8">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 rounded-full bg-white p-2 overflow-hidden shrink-0">
+                      <img 
+                         src={experience.find(j => j.id === selectedId)?.logo}
+                         onError={(e) => e.target.src = "https://cdn-icons-png.flaticon.com/512/3686/3686926.png"} 
+                         className="w-full h-full object-contain" 
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-white">
+                        {experience.find(j => j.id === selectedId)?.role}
+                      </h3>
+                      <p className="text-cyan-400 font-medium text-lg">
+                        {experience.find(j => j.id === selectedId)?.company}
+                      </p>
+                      <p className="text-slate-500 text-sm font-mono mt-1">
+                         {experience.find(j => j.id === selectedId)?.date}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="space-y-3 text-slate-300 leading-relaxed text-sm md:text-base">
+                     {experience.find(j => j.id === selectedId)?.desc.map((point, i) => (
+                       <div key={i} className="flex gap-3 items-start">
+                         <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0"></span>
+                         <p>{point}</p>
+                       </div>
+                     ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
         {/* PROJECTS SECTION */}
         <SectionHeader title="Featured Projects" />
@@ -252,6 +333,43 @@ export default function Portfolio() {
               </p>
             </motion.div>
           ))}
+        </div>
+
+        {/* TESTIMONIALS SECTION */}
+        <SectionHeader title="What People Say" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+          {/* Testimonial 1 */}
+          <div className="glass-card p-8 rounded-2xl relative">
+            <div className="absolute -top-4 -left-4 bg-cyan-500 text-slate-900 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="transform rotate-180"><path d="M14.017 21L14.017 18C14.017 16.896 14.321 16.067 14.929 15.513C15.537 14.959 16.485 14.682 17.773 14.682V17C16.918 17 16.49 17.375 16.49 18.125V21H14.017ZM8.017 21L8.017 18C8.017 16.896 8.321 16.067 8.929 15.513C9.537 14.959 10.485 14.682 11.773 14.682V17C10.918 17 10.49 17.375 10.49 18.125V21H8.017ZM16.017 13H18.017C18.017 12 18.017 11 18.017 9C18.017 7.5 17.684 6.375 17.017 5.625C16.35 4.875 15.184 4.5 13.517 4.5V7C14.35 7 14.892 7.146 15.142 7.438C15.392 7.729 15.517 8.25 15.517 9V13H12.017V13ZM10.017 13H12.017C12.017 12 12.017 11 12.017 9C12.017 7.5 11.684 6.375 11.017 5.625C10.35 4.875 9.184 4.5 7.517 4.5V7C8.35 7 8.892 7.146 9.142 7.438C9.392 7.729 9.517 8.25 9.517 9V13H6.017V13Z"></path></svg>
+            </div>
+            <p className="text-slate-300 italic mb-6 leading-relaxed">
+              "The OrderReviewV2 refactor was a beast of a project. Vishnu didn't just port the code; he completely redesigned the flow using the SAGA pattern. He turned a fragile legacy workflow into something that just works. The 75% complexity reduction speaks for itself."
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">EM</div>
+              <div>
+                <h4 className="font-bold text-white text-sm">Engineering Manager</h4>
+                <p className="text-cyan-400 text-xs">Comcast (Order Management)</p>
+              </div>
+            </div>
+          </div>
+          {/* Testimonial 2 */}
+          <div className="glass-card p-8 rounded-2xl relative">
+            <div className="absolute -top-4 -left-4 bg-cyan-500 text-slate-900 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="transform rotate-180"><path d="M14.017 21L14.017 18C14.017 16.896 14.321 16.067 14.929 15.513C15.537 14.959 16.485 14.682 17.773 14.682V17C16.918 17 16.49 17.375 16.49 18.125V21H14.017ZM8.017 21L8.017 18C8.017 16.896 8.321 16.067 8.929 15.513C9.537 14.959 10.485 14.682 11.773 14.682V17C10.918 17 10.49 17.375 10.49 18.125V21H8.017ZM16.017 13H18.017C18.017 12 18.017 11 18.017 9C18.017 7.5 17.684 6.375 17.017 5.625C16.35 4.875 15.184 4.5 13.517 4.5V7C14.35 7 14.892 7.146 15.142 7.438C15.392 7.729 15.517 8.25 15.517 9V13H12.017V13ZM10.017 13H12.017C12.017 12 12.017 11 12.017 9C12.017 7.5 11.684 6.375 11.017 5.625C10.35 4.875 9.184 4.5 7.517 4.5V7C8.35 7 8.892 7.146 9.142 7.438C9.392 7.729 9.517 8.25 9.517 9V13H6.017V13Z"></path></svg>
+            </div>
+            <p className="text-slate-300 italic mb-6 leading-relaxed">
+              "We needed the Critical Service Promotions engine to handle a massive spike in traffic without latency. Vishnu's database optimizations were spot on. He is the guy you want on the team when performance matters."
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">TL</div>
+              <div>
+                <h4 className="font-bold text-white text-sm">Tech Lead</h4>
+                <p className="text-cyan-400 text-xs">Comcast (Promotions Team)</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* FOOTER */}
