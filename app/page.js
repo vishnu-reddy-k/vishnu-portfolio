@@ -102,10 +102,42 @@ const projects = [
 
 // --- HOBBIES & INTERESTS DATA ---
 const movies = [
-  { id: 1, title: "Interstellar", genre: "Sci-Fi", desc: "A masterpiece of visual storytelling and physics." },
-  { id: 2, title: "The Dark Knight", genre: "Action/Thriller", desc: "Complexity of chaos vs order." },
-  { id: 3, title: "Silicon Valley", genre: "Comedy Series", desc: "Relatable tech startup chaos." },
-  { id: 4, title: "Inception", genre: "Sci-Fi", desc: "Layers of reality and architectural design." },
+  { 
+    id: 1, 
+    title: "The Maze Runner", 
+    genre: "English • Sci-Fi Thriller", 
+    desc: "A gripping dystopian saga. What keeps me glued to the screen is the intense story progression and the mystery of the plot that unfolds with every scene." 
+  },
+  { 
+    id: 2, 
+    title: "Queen (Mr. Queen)", 
+    genre: "Korean • Historical Comedy", 
+    desc: "A K-Drama masterpiece with next-level humor. I love how it balances the story with comedy that keeps me laughing throughout the entire series." 
+  },
+  { 
+    id: 3, 
+    title: "Suits", 
+    genre: "English • Legal Drama", 
+    desc: "A sharp and witty series. I enjoy how every episode brings a new complex case and a fresh twist, keeping the narrative engaging and dynamic." 
+  },
+  { 
+    id: 4, 
+    title: "Happy Days", 
+    genre: "Telugu • Coming-of-Age", 
+    desc: "A nostalgic journey through college life. It beautifully captures how deep friendships are formed and how we learn life's most important lessons through those bonds." 
+  },
+  { 
+    id: 5, 
+    title: "Home", 
+    genre: "Malayalam • Family Drama", 
+    desc: "A heartwarming and relatable tale. It touches on the subtle emotional gap between a caring father and a son caught up in modern life, reminding us to prioritize family." 
+  },
+  { 
+    id: 6, 
+    title: "Tourist Family", 
+    genre: "Tamil • Dramedy", 
+    desc: "A story of a family migrated from Sri Lanka. Despite the serious context, I love how the film uses humor to show their pure-hearted nature and how they effortlessly mingle with their neighbors." 
+  },
 ];
 
 const travelSpots = [
