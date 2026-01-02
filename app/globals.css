@@ -15,7 +15,7 @@ body {
   overflow-x: hidden; /* Prevents side scrolling */
 }
 
-/* The Background Glow Animation */
+/* --- GLOW ANIMATIONS --- */
 @keyframes blob {
   0% { transform: translate(0px, 0px) scale(1); }
   33% { transform: translate(30px, -50px) scale(1.1); }
@@ -35,7 +35,7 @@ body {
   animation-delay: 4s;
 }
 
-/* Glass Card Utility */
+/* --- GLASS CARD UTILITY --- */
 .glass-card {
   background: rgba(255, 255, 255, 0.03); /* 3% White opacity */
   backdrop-filter: blur(10px);
