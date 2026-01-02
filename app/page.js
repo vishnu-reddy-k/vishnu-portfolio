@@ -4,8 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, 
-  ArrowRight, ExternalLink, Briefcase, Database, X, 
-  Film, Plane, MapPin, Camera, Heart 
+  ArrowRight, ExternalLink, Database, X, 
+  Film, Plane, MapPin, Camera 
 } from "lucide-react";
 
 // --- PERSONAL DATA ---
@@ -442,16 +442,7 @@ export default function Portfolio() {
                   className="grid grid-cols-1 md:grid-cols-2 gap-4"
                 >
                   {movies.map((movie) => (
-                    <div key={movie.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 flex items-start gap-4 hover:bg-slate-800/60 transition-colors">
-                      <div className="p-3 bg-cyan-500/10 rounded-lg text-cyan-400">
-                        <Film size={24} />
-                      </div>
-                      <div>
-                        <h4 className="text-white font-bold text-lg">{movie.title}</h4>
-                        <span className="text-xs font-mono text-cyan-500 mb-1 block">{movie.genre}</span>
-                        <p className="text-slate-400 text-sm">{movie.desc}</p>
-                      </div>
-                    </div>
+                    <MovieCard key={movie.id} movie={movie} />
                   ))}
                 </motion.div>
               ) : (
@@ -469,7 +460,7 @@ export default function Portfolio() {
                       className="group relative rounded-2xl overflow-hidden aspect-[4/5] cursor-pointer"
                       whileHover={{ scale: 1.02 }}
                     >
-                      {/* Placeholder Image using standard colored div if image fails, else generic travel placeholder */}
+                      {/* Placeholder Image */}
                       <img 
                         src={spot.image} 
                         alt={spot.place}
@@ -498,7 +489,6 @@ export default function Portfolio() {
           </div>
         </div>
 
-
         {/* FOOTER */}
         <footer className="border-t border-slate-800 pt-10 pb-10 text-center text-slate-500 text-sm">
           <p>© {new Date().getFullYear()} Vishnu Reddy. Crafted with Next.js & Tailwind.</p>
@@ -510,6 +500,7 @@ export default function Portfolio() {
 }
 
 // HELPER COMPONENTS
+
 function SectionHeader({ title }) {
   return (
     <div className="flex items-center gap-4 mb-10 md:mb-16">
@@ -524,5 +515,70 @@ function SocialIcon({ icon, href }) {
     <a href={href} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full border border-slate-700 text-slate-400 hover:text-white hover:border-cyan-500 hover:bg-cyan-500/10 transition-all">
       {icon}
     </a>
+  );
+}
+
+function MovieCard({ movie }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      layout
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      onClick={() => setIsHovered(!isHovered)} // Click support for mobile
+      className={`relative p-5 rounded-2xl border transition-all duration-300 ease-out cursor-default overflow-hidden ${
+        isHovered 
+          ? "bg-slate-800/90 border-cyan-500/50 shadow-[0_0_30px_rgba(6,182,212,0.15)] z-10" 
+          : "bg-slate-900/40 border-slate-800 hover:border-slate-700"
+      }`}
+    >
+      <motion.div layout="position" className="flex items-start gap-4">
+        {/* Icon Container */}
+        <div 
+          className={`p-3 rounded-xl transition-colors duration-300 shrink-0 ${
+            isHovered ? "bg-cyan-500 text-white" : "bg-slate-800 text-slate-500"
+          }`}
+        >
+          <Film size={22} />
+        </div>
+
+        {/* Text Info */}
+        <div className="flex-1 pt-1">
+          <motion.h4 
+            layout="position" 
+            className={`font-bold text-lg leading-tight transition-colors duration-300 ${
+              isHovered ? "text-white" : "text-slate-200"
+            }`}
+          >
+            {movie.title}
+          </motion.h4>
+          <motion.span 
+            layout="position" 
+            className="text-xs font-mono text-cyan-500 block mt-1"
+          >
+            {movie.genre}
+          </motion.span>
+        </div>
+      </motion.div>
+
+      {/* Expandable Description */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+             <div className="pt-4 mt-4 border-t border-slate-700/50">
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  {movie.desc}
+                </p>
+             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
