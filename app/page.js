@@ -159,7 +159,7 @@ export default function Portfolio() {
               </a>
               <div className="flex gap-4">
                 <SocialIcon icon={<Github size={20}/>} href="https://github.com/vishnukarnati" />
-                <SocialIcon icon={<Linkedin size={20}/>} href="https://www.linkedin.com/in/vishnu-reddy/" />
+                <SocialIcon icon={<Linkedin size={20}/>} href="https://www.linkedin.com/in/reddykv/" />
                 <SocialIcon icon={<Mail size={20}/>} href={`mailto:${personalInfo.email}`} />
               </div>
             </motion.div>
