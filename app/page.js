@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, ArrowRight, ExternalLink, Briefcase, Database, X } from "lucide-react";
+import { 
+  Github, Linkedin, Mail, Code2, Server, Cloud, Terminal, 
+  ArrowRight, ExternalLink, Briefcase, Database, X, 
+  Film, Plane, MapPin, Camera, Heart 
+} from "lucide-react";
 
 // --- PERSONAL DATA ---
 const personalInfo = {
@@ -51,14 +55,13 @@ const skillCards = [
   },
 ];
 
-// EXPERIENCE DATA (Updated for Expandable Cards)
+// EXPERIENCE DATA
 const experience = [
   {
     id: "exp-1",
     company: "Comcast",
     role: "Development Engineer 2 (Team Lead)",
     date: "Apr 2024 - Present",
-    // NOTE: Ensure you have a 'comcast.png' in your public folder, or this will use the fallback icon
     logo: "/comcast.png", 
     shortDesc: "Leading the 'OrderReviewV2' initiative and refactoring monoliths.",
     desc: [
@@ -97,6 +100,36 @@ const projects = [
   }
 ];
 
+// --- HOBBIES & INTERESTS DATA ---
+const movies = [
+  { id: 1, title: "Interstellar", genre: "Sci-Fi", desc: "A masterpiece of visual storytelling and physics." },
+  { id: 2, title: "The Dark Knight", genre: "Action/Thriller", desc: "Complexity of chaos vs order." },
+  { id: 3, title: "Silicon Valley", genre: "Comedy Series", desc: "Relatable tech startup chaos." },
+  { id: 4, title: "Inception", genre: "Sci-Fi", desc: "Layers of reality and architectural design." },
+];
+
+const travelSpots = [
+  { 
+    id: 1, 
+    place: "Manali, India", 
+    desc: "Snow-capped peaks and serenity.", 
+    // Replace with your actual image path e.g. "/travel/manali.jpg"
+    image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=600&auto=format&fit=crop" 
+  },
+  { 
+    id: 2, 
+    place: "Kerala Backwaters", 
+    desc: "Nature's own therapy.", 
+    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=600&auto=format&fit=crop" 
+  },
+  { 
+    id: 3, 
+    place: "Rishikesh", 
+    desc: "Adventure meets spirituality.", 
+    image: "https://images.unsplash.com/photo-1592652431792-71c19b062963?q=80&w=600&auto=format&fit=crop" 
+  },
+];
+
 // --- ANIMATIONS CONFIG ---
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -110,6 +143,9 @@ const stagger = {
 
 export default function Portfolio() {
   const [selectedId, setSelectedId] = useState(null);
+  
+  // State for Interests Section (default to movies)
+  const [interestTab, setInterestTab] = useState("movies"); 
 
   return (
     <main className="min-h-screen relative bg-slate-950 selection:bg-cyan-500 selection:text-white overflow-x-hidden text-slate-200 font-sans">
@@ -199,7 +235,7 @@ export default function Portfolio() {
                 <div className="flex justify-between items-start mb-4 md:mb-6">
                   <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 group-hover:border-cyan-500/30 group-hover:bg-cyan-950/20 transition-colors">
                     <div className="transform group-hover:scale-110 transition-transform duration-300">
-                       {card.icon}
+                        {card.icon}
                     </div>
                   </div>
                   <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 group-hover:border-cyan-500/30 group-hover:text-cyan-400 transition-colors">
@@ -281,9 +317,9 @@ export default function Portfolio() {
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-16 h-16 rounded-full bg-white p-2 overflow-hidden shrink-0">
                       <img 
-                         src={experience.find(j => j.id === selectedId)?.logo}
-                         onError={(e) => e.target.src = "https://cdn-icons-png.flaticon.com/512/3686/3686926.png"} 
-                         className="w-full h-full object-contain" 
+                          src={experience.find(j => j.id === selectedId)?.logo}
+                          onError={(e) => e.target.src = "https://cdn-icons-png.flaticon.com/512/3686/3686926.png"} 
+                          className="w-full h-full object-contain" 
                       />
                     </div>
                     <div>
@@ -294,17 +330,17 @@ export default function Portfolio() {
                         {experience.find(j => j.id === selectedId)?.company}
                       </p>
                       <p className="text-slate-500 text-sm font-mono mt-1">
-                         {experience.find(j => j.id === selectedId)?.date}
+                          {experience.find(j => j.id === selectedId)?.date}
                       </p>
                     </div>
                   </div>
                   <div className="space-y-3 text-slate-300 leading-relaxed text-sm md:text-base">
-                     {experience.find(j => j.id === selectedId)?.desc.map((point, i) => (
-                       <div key={i} className="flex gap-3 items-start">
-                         <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0"></span>
-                         <p>{point}</p>
-                       </div>
-                     ))}
+                      {experience.find(j => j.id === selectedId)?.desc.map((point, i) => (
+                        <div key={i} className="flex gap-3 items-start">
+                          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0"></span>
+                          <p>{point}</p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </motion.div>
@@ -334,6 +370,102 @@ export default function Portfolio() {
             </motion.div>
           ))}
         </div>
+
+        {/* --- NEW SECTION: BEYOND THE CODE (Hobbies) --- */}
+        <SectionHeader title="Beyond the Code" />
+        <div className="mb-24">
+          <p className="text-slate-400 text-lg mb-8 max-w-2xl">
+            I believe in keeping a healthy balance between work and life. 
+            When I'm not deploying microservices, you can find me exploring new narratives in cinema or new locations on the map.
+          </p>
+
+          {/* Toggle Buttons */}
+          <div className="flex gap-6 mb-8 border-b border-slate-800 pb-2">
+            <button 
+              onClick={() => setInterestTab("movies")}
+              className={`flex items-center gap-2 pb-2 text-lg font-medium transition-colors relative ${interestTab === 'movies' ? 'text-cyan-400' : 'text-slate-500 hover:text-slate-300'}`}
+            >
+              <Film size={20} /> Cinema
+              {interestTab === 'movies' && <motion.div layoutId="underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400" />}
+            </button>
+            <button 
+              onClick={() => setInterestTab("travel")}
+              className={`flex items-center gap-2 pb-2 text-lg font-medium transition-colors relative ${interestTab === 'travel' ? 'text-green-400' : 'text-slate-500 hover:text-slate-300'}`}
+            >
+              <Plane size={20} /> Travel
+              {interestTab === 'travel' && <motion.div layoutId="underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-green-400" />}
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          <div className="min-h-[300px]">
+            <AnimatePresence mode="wait">
+              {interestTab === "movies" ? (
+                <motion.div 
+                  key="movies"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                >
+                  {movies.map((movie) => (
+                    <div key={movie.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 flex items-start gap-4 hover:bg-slate-800/60 transition-colors">
+                      <div className="p-3 bg-cyan-500/10 rounded-lg text-cyan-400">
+                        <Film size={24} />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-lg">{movie.title}</h4>
+                        <span className="text-xs font-mono text-cyan-500 mb-1 block">{movie.genre}</span>
+                        <p className="text-slate-400 text-sm">{movie.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="travel"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                >
+                  {travelSpots.map((spot) => (
+                    <motion.div 
+                      key={spot.id}
+                      className="group relative rounded-2xl overflow-hidden aspect-[4/5] cursor-pointer"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      {/* Placeholder Image using standard colored div if image fails, else generic travel placeholder */}
+                      <img 
+                        src={spot.image} 
+                        alt={spot.place}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+                      
+                      <div className="absolute bottom-0 left-0 p-6 w-full">
+                        <div className="flex items-center gap-2 text-green-400 text-sm font-medium mb-1">
+                          <MapPin size={16} /> {spot.place}
+                        </div>
+                        <p className="text-white text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                          {spot.desc}
+                        </p>
+                      </div>
+                      
+                      {/* Hover Overlay Icon */}
+                      <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                         <Camera size={18} />
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
 
         {/* FOOTER */}
         <footer className="border-t border-slate-800 pt-10 pb-10 text-center text-slate-500 text-sm">
