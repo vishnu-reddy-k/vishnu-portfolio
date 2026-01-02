@@ -102,42 +102,64 @@ export default function Portfolio() {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-20">
         
-        {/* HERO SECTION */}
+        {/* HERO SECTION WITH PHOTO */}
         <motion.section 
           initial="initial" animate="animate" variants={stagger}
-          className="flex flex-col justify-center min-h-[70vh] md:min-h-[80vh] text-center md:text-left mb-16 md:mb-0"
+          className="flex flex-col-reverse md:flex-row items-center justify-between min-h-[70vh] md:min-h-[80vh] mb-16 md:mb-0 gap-10"
         >
-          <motion.div variants={fadeInUp} className="mb-4 flex items-center justify-center md:justify-start gap-2">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
-            </span>
-            <span className="text-cyan-400 text-sm font-medium tracking-wide uppercase">Open to Work</span>
-          </motion.div>
+          {/* LEFT SIDE: TEXT */}
+          <div className="flex-1 text-center md:text-left">
+            <motion.div variants={fadeInUp} className="mb-4 flex items-center justify-center md:justify-start gap-2">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+              </span>
+              <span className="text-cyan-400 text-sm font-medium tracking-wide uppercase">Open to Work</span>
+            </motion.div>
 
-          <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tight text-white mb-6">
-            Hello, I'm <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block mt-2 md:inline md:mt-0">
-              {personalInfo.name}
-            </span>
-          </motion.h1>
+            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
+              Hello, I'm <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block mt-2">
+                {personalInfo.name}
+              </span>
+            </motion.h1>
 
-          <motion.h2 variants={fadeInUp} className="text-xl sm:text-2xl md:text-3xl text-slate-300 font-light mb-8 max-w-2xl mx-auto md:mx-0">
-            {personalInfo.role}
-          </motion.h2>
+            <motion.h2 variants={fadeInUp} className="text-xl sm:text-2xl md:text-3xl text-slate-300 font-light mb-8 max-w-2xl mx-auto md:mx-0">
+              {personalInfo.role}
+            </motion.h2>
 
-          <motion.p variants={fadeInUp} className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mb-10 mx-auto md:mx-0">
-            {personalInfo.about}
-          </motion.p>
+            <motion.p variants={fadeInUp} className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-lg mb-10 mx-auto md:mx-0">
+              {personalInfo.about}
+            </motion.p>
 
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start">
-            <a href={`mailto:${personalInfo.email}`} className="group relative w-full sm:w-auto px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-cyan-50 transition-all flex items-center justify-center gap-2">
-              Contact Me <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
-            </a>
-            <div className="flex gap-4">
-              <SocialIcon icon={<Github size={20}/>} href="https://github.com/vishnu-reddy-k/" />
-              <SocialIcon icon={<Linkedin size={20}/>} href="https://www.linkedin.com/in/reddykv/" />
-              <SocialIcon icon={<Mail size={20}/>} href={`mailto:${personalInfo.email}`} />
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start">
+              <a href={`mailto:${personalInfo.email}`} className="group relative w-full sm:w-auto px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-cyan-50 transition-all flex items-center justify-center gap-2">
+                Contact Me <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
+              </a>
+              <div className="flex gap-4">
+                <SocialIcon icon={<Github size={20}/>} href="https://github.com" />
+                <SocialIcon icon={<Linkedin size={20}/>} href="https://linkedin.com" />
+                <SocialIcon icon={<Mail size={20}/>} href={`mailto:${personalInfo.email}`} />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* RIGHT SIDE: PHOTO */}
+          <motion.div variants={fadeInUp} className="relative w-64 h-64 md:w-96 md:h-96 shrink-0">
+            {/* The Glowing Blur Effect Behind Image */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
+            
+            {/* The Image Container */}
+            <div className="relative w-full h-full rounded-full border-4 border-slate-800/50 overflow-hidden shadow-2xl group">
+              {/* Replace '/me.jpg' with your filename if different */}
+              <img 
+                src="/me.jpg" 
+                alt="Vishnu Reddy" 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              
+              {/* Optional: Glass overlay on hover */}
+              <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
           </motion.div>
         </motion.section>
