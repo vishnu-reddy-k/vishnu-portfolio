@@ -198,14 +198,7 @@ export default function Portfolio() {
         >
           {/* LEFT SIDE: TEXT */}
           <div className="flex-1 text-center md:text-left">
-            <motion.div variants={fadeInUp} className="mb-4 flex items-center justify-center md:justify-start gap-2">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
-              </span>
-              <span className="text-cyan-400 text-sm font-medium tracking-wide uppercase">Open to Work</span>
-            </motion.div>
-
+            
             <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
               Hello, I'm <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block mt-2">
